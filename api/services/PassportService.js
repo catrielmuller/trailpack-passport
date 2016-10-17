@@ -131,8 +131,10 @@ module.exports = class PassportService extends Service {
       err.statusCode = 400
       return Promise.reject(err)
     }
-
     return this.app.services.FootprintService.create('user', userInfos).then(user => {
+      if(this.app.services['PermissionService'] && this.app.config.permissions.defaultRegisterRole){
+        this.app.services.PermissionService.addRoleToUser(user, this.app.config.permissions.defaultRegisterRole)
+      }
       return this.app.services.FootprintService.createAssociation('user', user.id, 'passports', {
         protocol: 'local',
         password: password
