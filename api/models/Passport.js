@@ -119,7 +119,7 @@ module.exports = class Passport extends Model {
         identifier: {type: 'string'},
         tokens: {type: 'string'},
 
-        profile: {type: 'json', allowNull: true},
+        profile: {type: 'json'},
 
         // Associations
         //
