@@ -23,11 +23,9 @@ module.exports = class PassportService extends Service {
    */
   createToken(user) {
     const config = this.app.config.passport.strategies.jwt
+    
     return jwt.sign({
-      user: JSON.stringify({
-        id: user.id,
-        email: user.email
-      })
+      user: user.toJSON()
     },
       config.tokenOptions.secret,
       {
