@@ -119,6 +119,8 @@ module.exports = class Passport extends Model {
         identifier: {type: 'string'},
         tokens: {type: 'string'},
 
+        profile: {type: 'json', allowNull: true},
+
         // Associations
         //
         // Associate every passport with one, and only one, user. This requires an
