@@ -183,15 +183,10 @@ module.exports = class PassportService extends Service {
     query.user = user.id
     query[provider === 'local' ? 'protocol' : 'provider'] = provider
 
-    return this.app.services.FootprintService.find('passport', query).then(passport => {
-      if (passport) {
-        return this.app.services.FootprintService.destroy('passport', passport.id)
-          .then(passport => next(null, user))
-      }
-      else {
-        throw new Error('E_USER_NO_PASSWORD')
-      }
-    }).catch(next)
+    return this.app.services.FootprintService
+            .destroy('passport', query)
+            .then(passport => next(null, user))
+            .catch(next)
   }
 
   /**
